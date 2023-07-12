@@ -1,11 +1,10 @@
 import { Routes, Route } from "react-router-dom";
 import { Home, Login, Register, UserProfile } from "./pages";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Header from "./components/Header";
+
 const Shop = () => {
   return (
     <>
-      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
