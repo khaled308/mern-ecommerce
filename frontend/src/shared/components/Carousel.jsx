@@ -36,6 +36,7 @@ const Carousel = ({ slides }) => {
                 src={slide.img}
                 className="absolute inset-0 object-cover w-full h-full"
                 alt={slide.alt}
+                crossOrigin="anonymous"
               />
             </div>
           ))}
