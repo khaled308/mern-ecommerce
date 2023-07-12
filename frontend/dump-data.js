@@ -39,3 +39,39 @@ export const slides = [
     alt: "Slide 3",
   },
 ];
+
+export const products = [
+  {
+    id: "0",
+    title: "Product 1",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3HS5CxlsAxMuawbTM5MnIt2yzWqqAxpQFRQ&usqp=CAU",
+    price: 100,
+    category: "0",
+    rating: 4,
+  },
+  {
+    id: "1",
+    title: "Product 2",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3HS5CxlsAxMuawbTM5MnIt2yzWqqAxpQFRQ&usqp=CAU",
+    price: 200,
+    category: "0",
+    rating: 3,
+  },
+  {
+    id: "2",
+    title: "Product 3",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3HS5CxlsAxMuawbTM5MnIt2yzWqqAxpQFRQ&usqp=CAU",
+    price: 300,
+    category: "0",
+    rating: 5,
+  },
+];
