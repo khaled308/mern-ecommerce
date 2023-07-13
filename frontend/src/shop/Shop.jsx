@@ -6,6 +6,7 @@ import {
   UserProfile,
   ProductsList,
   ProductDetails,
+  Cart,
 } from "./pages";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -16,6 +17,7 @@ const Shop = () => {
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<ProductsList />} />
         <Route path="/products/:id" element={<ProductDetails />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/user/*" element={<ProtectedRoute />}>
