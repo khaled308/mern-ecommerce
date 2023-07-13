@@ -46,8 +46,13 @@ export const products = [
     title: "Product 1",
     description:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    image:
+    cover_image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3HS5CxlsAxMuawbTM5MnIt2yzWqqAxpQFRQ&usqp=CAU",
+    images: [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3HS5CxlsAxMuawbTM5MnIt2yzWqqAxpQFRQ&usqp=CAU",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3HS5CxlsAxMuawbTM5MnIt2yzWqqAxpQFRQ&usqp=CAU",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3HS5CxlsAxMuawbTM5MnIt2yzWqqAxpQFRQ&usqp=CAU",
+    ],
     price: 100,
     category: "0",
     rating: 4,
@@ -57,8 +62,13 @@ export const products = [
     title: "Product 2",
     description:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    image:
+    cover_image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3HS5CxlsAxMuawbTM5MnIt2yzWqqAxpQFRQ&usqp=CAU",
+    images: [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3HS5CxlsAxMuawbTM5MnIt2yzWqqAxpQFRQ&usqp=CAU",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3HS5CxlsAxMuawbTM5MnIt2yzWqqAxpQFRQ&usqp=CAU",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3HS5CxlsAxMuawbTM5MnIt2yzWqqAxpQFRQ&usqp=CAU",
+    ],
     price: 200,
     category: "0",
     rating: 3,
@@ -68,10 +78,65 @@ export const products = [
     title: "Product 3",
     description:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    image:
+    cover_image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3HS5CxlsAxMuawbTM5MnIt2yzWqqAxpQFRQ&usqp=CAU",
+    images: [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3HS5CxlsAxMuawbTM5MnIt2yzWqqAxpQFRQ&usqp=CAU",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3HS5CxlsAxMuawbTM5MnIt2yzWqqAxpQFRQ&usqp=CAU",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3HS5CxlsAxMuawbTM5MnIt2yzWqqAxpQFRQ&usqp=CAU",
+    ],
     price: 300,
     category: "0",
     rating: 5,
+  },
+];
+
+export const productReviews = [
+  {
+    id: "0",
+    productId: "0",
+    userId: "0",
+    comment:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    rating: 4,
+  },
+  {
+    id: "1",
+    productId: "0",
+    userId: "0",
+    comment:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    rating: 5,
+  },
+  {
+    id: "2",
+    productId: "0",
+    userId: "1",
+    comment:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    rating: 3,
+  },
+  {
+    id: "3",
+    productId: "0",
+    userId: "2",
+    comment:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    rating: 2,
+  },
+];
+
+export const users = [
+  {
+    id: "0",
+    name: "User 1",
+    email: "user1@gmail.com",
+    password: "123456",
+  },
+  {
+    id: "1",
+    name: "User 2",
+    email: "user2@gmail.com",
+    password: "123456",
   },
 ];

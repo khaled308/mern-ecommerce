@@ -4,12 +4,6 @@ const RangeSlider = () => {
   const [value, setValue] = useState(2.5);
   return (
     <div>
-      <label
-        htmlFor="steps-range"
-        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-      >
-        Range steps
-      </label>
       <input
         id="steps-range"
         type="range"

@@ -3,7 +3,7 @@ import { AiFillStar } from "react-icons/ai";
 
 const Rating = ({ rating }) => {
   return (
-    <div className="flex items-center space-x-1 mb-5">
+    <div className="flex items-center space-x-1">
       {Array.from({ length: 5 }, (_, index) => {
         return (
           <AiFillStar
