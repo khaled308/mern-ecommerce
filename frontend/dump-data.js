@@ -140,3 +140,45 @@ export const users = [
     password: "123456",
   },
 ];
+
+export const orders = [
+  {
+    id: "0",
+    userId: "0",
+    date: "2021-01-01",
+    total: 100,
+    delivered: false,
+  },
+  {
+    id: "1",
+    userId: "0",
+    date: "2021-01-01",
+    total: 100,
+    delivered: true,
+    paid: true,
+  },
+  {
+    id: "2",
+    userId: "0",
+    date: "2021-01-01",
+    total: 100,
+    delivered: false,
+    paid: true,
+  },
+  {
+    id: "3",
+    userId: "0",
+    date: "2021-01-01",
+    total: 100,
+    delivered: false,
+    paid: false,
+  },
+  {
+    id: "4",
+    userId: "0",
+    date: "2021-01-01",
+    total: 100,
+    delivered: true,
+    paid: false,
+  },
+];

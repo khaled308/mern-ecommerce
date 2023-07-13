@@ -7,6 +7,8 @@ import {
   ProductsList,
   ProductDetails,
   Cart,
+  UserOrders,
+  UserOrderDetails,
 } from "./pages";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -22,6 +24,11 @@ const Shop = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/user/*" element={<ProtectedRoute />}>
           <Route index element={<UserProfile />} />
+          <Route path=":id/orders" element={<UserOrders />} />
+          <Route
+            path=":userId/orders/:orderId"
+            element={<UserOrderDetails />}
+          />
         </Route>
         <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>

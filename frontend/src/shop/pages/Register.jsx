@@ -1,6 +1,6 @@
 import { Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link } from "react-router-dom";
 import ShopLayout from "../layouts/ShopLayout";
 import Label from "../../shared/components/form/Label";
 import Input from "../../shared/components/form/Input";
