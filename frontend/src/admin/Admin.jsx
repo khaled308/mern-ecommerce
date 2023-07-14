@@ -7,6 +7,7 @@ import {
   CreateProduct,
   EditProduct,
   Users,
+  UserEdit,
 } from "./pages";
 const Admin = () => {
   return (
@@ -18,6 +19,7 @@ const Admin = () => {
       <Route path="/products/create" element={<CreateProduct />} />
       <Route path="/products/edit/:id" element={<EditProduct />} />
       <Route path="/users" element={<Users />} />
+      <Route path="/users/edit/:userId" element={<UserEdit />} />
     </Routes>
   );
 };

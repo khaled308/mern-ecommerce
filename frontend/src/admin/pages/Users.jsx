@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import AdminLayout from "../layouts/AdminLayout";
 import { users } from "../../../dump-data";
 
@@ -38,8 +39,14 @@ const Users = () => {
                 <td className="px-6 py-4 whitespace-nowrap">{user.email}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{user.role}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
+                  <Link
+                    to={`/admin/users/edit/${user.id}`}
+                    className="text-blue-500 hover:underline"
+                  >
+                    Edit
+                  </Link>
                   <button
-                    className="text-red-500 hover:underline"
+                    className="text-red-500 hover:underline ml-4"
                     onClick={() => handleDelete(user.id)}
                   >
                     Delete
