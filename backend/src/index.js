@@ -4,6 +4,7 @@ const cors = require("cors");
 const connectToDB = require("./config/db");
 const errorMiddleware = require("./middlewares/errorMiddleware");
 const categoryRoutes = require("./routes/category.routes");
+const productRoutes = require("./routes/product.routes");
 const logger = require("./utils/logger");
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(cors());
 
 // routes
 app.use("/api/categories", categoryRoutes);
+app.use("/api/products", productRoutes);
 
 app.use(errorMiddleware);
 
