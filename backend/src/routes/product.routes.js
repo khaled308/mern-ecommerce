@@ -10,7 +10,7 @@ const { upload } = require("../middlewares/multer");
 const {
   createProductValidator,
 } = require("../validations/product.validations");
-const { isAuthorized, isAdmin } = require("../middlewares/auth");
+const { isAuth, isAdmin } = require("../middlewares/auth");
 
 const router = require("express").Router();
 
@@ -18,7 +18,7 @@ router
   .route("/")
   .get(getProducts)
   .post(
-    isAuthorized,
+    isAuth,
     isAdmin,
     upload.fields([
       { name: "cover_image", maxCount: 1 },
@@ -30,8 +30,8 @@ router
 router
   .route("/:id")
   .get(getProduct)
-  .put(isAuthorized, isAdmin, updateProduct)
-  .delete(isAuthorized, isAdmin, deleteProduct);
+  .put(isAuth, isAdmin, updateProduct)
+  .delete(isAuth, isAdmin, deleteProduct);
 router.get("/best-selling", getBestSellingProducts);
 
 module.exports = router;

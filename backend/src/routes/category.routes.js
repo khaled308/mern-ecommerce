@@ -6,7 +6,7 @@ const {
   deleteCategory,
   saveAttr,
 } = require("../controllers/category.controller");
-const { isAuthorized, isAdmin } = require("../middlewares/auth");
+const { isAuth, isAdmin } = require("../middlewares/auth");
 const {
   categoryCreateValidator,
   categoryUpdateValidator,
@@ -18,16 +18,16 @@ const router = require("express").Router();
 router
   .route("/")
   .get(getCategories)
-  .post(isAuthorized, isAdmin, categoryCreateValidator, createCategory);
+  .post(isAuth, isAdmin, categoryCreateValidator, createCategory);
 
 router
   .route("/:id")
   .get(getCategory)
-  .put(isAuthorized, isAdmin, categoryUpdateValidator, updateCategory)
-  .delete(isAuthorized, isAdmin, deleteCategory);
+  .put(isAuth, isAdmin, categoryUpdateValidator, updateCategory)
+  .delete(isAuth, isAdmin, deleteCategory);
 
 router
   .route("/:id/attrs")
-  .put(isAuthorized, isAdmin, categorySaveAttrValidator, saveAttr);
+  .put(isAuth, isAdmin, categorySaveAttrValidator, saveAttr);
 
 module.exports = router;
