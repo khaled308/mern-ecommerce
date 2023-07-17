@@ -11,6 +11,7 @@ const {
   createProductValidator,
 } = require("../validations/product.validations");
 const { isAuth, isAdmin } = require("../middlewares/auth");
+const reviewRoutes = require("./review.routes");
 
 const router = require("express").Router();
 
@@ -33,5 +34,7 @@ router
   .put(isAuth, isAdmin, updateProduct)
   .delete(isAuth, isAdmin, deleteProduct);
 router.get("/best-selling", getBestSellingProducts);
+
+router.use("/:productId/reviews", reviewRoutes);
 
 module.exports = router;

@@ -4,10 +4,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const connectToDB = require("./config/db");
 const errorMiddleware = require("./middlewares/errorMiddleware");
-const categoryRoutes = require("./routes/category.routes");
-const productRoutes = require("./routes/product.routes");
-const authRoutes = require("./routes/auth.routes");
-const userRoutes = require("./routes/user.routes");
+const routes = require("./routes");
 const logger = require("./utils/logger");
 
 const app = express();
@@ -19,10 +16,7 @@ app.use(cors());
 app.use(cookieParser());
 
 // routes
-app.use("/api/categories", categoryRoutes);
-app.use("/api/products", productRoutes);
-app.use("/api/auth", authRoutes);
-app.use("/api/users", userRoutes);
+routes(app);
 
 app.use(errorMiddleware);
 
