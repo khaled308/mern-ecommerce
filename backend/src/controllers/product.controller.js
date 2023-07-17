@@ -1,4 +1,5 @@
 const Product = require("../models/Product");
+const { uploadFiles } = require("../services/fileUpload");
 const ApiFeatures = require("../utils/ApiFeatures");
 
 exports.getProducts = async (req, res) => {
@@ -23,18 +24,14 @@ exports.getProduct = async (req, res) => {
 };
 
 exports.createProduct = async (req, res) => {
-  const selected = [
-    "name",
-    "price",
-    "category",
-    "cover_image",
-    "description",
-    "images",
-  ];
+  const selected = ["name", "price", "category", "description", "stock"];
   const productData = {};
   selected.forEach((el) => {
     if (req.body[el]) productData[el] = req.body[el];
   });
+  const { cover_image, images } = await uploadFiles(req.files);
+  productData.cover_image = cover_image[0];
+  productData.images = images;
   const product = await Product.create(productData);
 
   res.status(201).json(product);
