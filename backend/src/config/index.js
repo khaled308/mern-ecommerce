@@ -8,4 +8,7 @@ module.exports = {
   cloudinaryApiSecret: process.env.CLOUDINARY_API_SECRET,
   jwtSecret: process.env.JWT_SECRET,
   node_env: process.env.ENV,
+  stripeSecretKey: process.env.STRIPE_SECRET_KEY,
+  clientDevUrl: process.env.CLIENT_DEV_URL,
+  clientProdUrl: process.env.CLIENT_PROD_URL,
 };
