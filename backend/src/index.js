@@ -12,7 +12,12 @@ const app = express();
 logger(app);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(
+  cors({
+    origin: [config.clientDevUrl, config.clientProdUrl],
+    credentials: true,
+  })
+);
 app.use(cookieParser());
 
 // routes

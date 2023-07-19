@@ -12,7 +12,8 @@ const router = require("express").Router();
 
 router
   .route("/")
-  .get(isAuth, isAdmin, getUsers)
+  // .get(isAuth, isAdmin, getUsers)
+  .get(getUsers)
   .post(isAuth, isAdmin, createUser);
 
 router

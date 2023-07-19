@@ -1,16 +1,52 @@
 import { Link } from "react-router-dom";
 import AdminLayout from "../layouts/AdminLayout";
-import { users } from "../../../dump-data";
+import { useEffect, useState } from "react";
+import { getUsers } from "../../api/user";
+import Alert from "../../shared/components/Alert";
 
 const Users = () => {
+  const [users, setUsers] = useState([]);
+  const [showAlert, setShowAlert] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState(null);
+
   const handleDelete = (userId) => {
-    // Handle delete logic for the user with the specified userId
-    console.log(`Delete user with id ${userId}`);
+    setShowAlert(true);
+    setSelectedUserId(userId);
   };
 
+  const handleConfirmDelete = () => {
+    console.log(`Deleting user with ID: ${selectedUserId}`);
+    setShowAlert(false);
+  };
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const data = await getUsers();
+      setUsers(data);
+    };
+
+    fetchUsers();
+  }, []);
   return (
     <AdminLayout>
+      {showAlert && (
+        <Alert
+          type="warning"
+          message="Are you sure you want to delete this user?"
+          onClose={() => setShowAlert(false)}
+          onConfirm={handleConfirmDelete}
+        />
+      )}
       <div className="max-w-full overflow-x-auto">
+        <div className="flex items-center justify-between mb-5">
+          <h1 className="text-2xl font-bold mb-4">Users</h1>
+          <Link
+            to="/admin/users/create"
+            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition-colors duration-300"
+          >
+            Create User
+          </Link>
+        </div>
         <table className="min-w-full divide-y divide-gray-200">
           <thead>
             <tr>
@@ -33,7 +69,7 @@ const Users = () => {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {users.map((user) => (
-              <tr key={user.id}>
+              <tr key={user._id}>
                 <td className="px-6 py-4 whitespace-nowrap">{user.id}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{user.name}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{user.email}</td>
@@ -47,7 +83,7 @@ const Users = () => {
                   </Link>
                   <button
                     className="text-red-500 hover:underline ml-4"
-                    onClick={() => handleDelete(user.id)}
+                    onClick={() => handleDelete(user._id)}
                   >
                     Delete
                   </button>

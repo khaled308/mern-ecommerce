@@ -1,15 +1,34 @@
 import { Link } from "react-router-dom";
 import AdminLayout from "../layouts/AdminLayout";
 import { products } from "../../../dump-data";
+import { useState } from "react";
+import Alert from "../../shared/components/Alert";
 
 const AdminProducts = () => {
+  const [showAlert, setShowAlert] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState(null);
+
   const handleDelete = (productId) => {
-    // Handle delete logic for the product with the specified productId
+    setShowAlert(true);
+    setSelectedProductId(productId);
     console.log(`Deleting product with id ${productId}`);
+  };
+
+  const handleConfirmDelete = () => {
+    console.log(`Deleting user with ID: ${selectedProductId}`);
+    setShowAlert(false);
   };
 
   return (
     <AdminLayout>
+      {showAlert && (
+        <Alert
+          type="warning"
+          message="Are you sure you want to delete this user?"
+          onClose={() => setShowAlert(false)}
+          onConfirm={handleConfirmDelete}
+        />
+      )}
       <div className="max-w-full overflow-x-auto">
         <div className="flex items-center justify-between mb-5">
           <h1 className="text-2xl font-bold mb-4">Products</h1>

@@ -1,11 +1,20 @@
 /* eslint-disable react/prop-types */
+import { useEffect } from "react";
 import { categories, slides } from "../../../dump-data";
 import Card from "../../shared/components/Card";
 import Carousel from "../../shared/components/Carousel";
 import ShopLayout from "../layouts/ShopLayout";
 import { Link } from "react-router-dom";
+import { getProducts } from "../../api/product";
 
 const Home = () => {
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const data = await getProducts();
+      console.log(data);
+    };
+    fetchProducts();
+  }, []);
   return (
     <ShopLayout>
       <Carousel slides={slides} />
