@@ -1,12 +1,24 @@
 /* eslint-disable react/no-unescaped-entities */
 import { Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import ShopLayout from "../layouts/ShopLayout";
 import Label from "../../shared/components/form/Label";
 import Input from "../../shared/components/form/Input";
+import { login, reset } from "../../features/auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import Loader from "../../shared/components/Loader";
+import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const { isSuccess, isError } = useSelector((state) => state.auth);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { isLoading } = useAuth();
+  const [authChecked, setAuthChecked] = useState(false);
+
   const INITIAL_DATA = {
     email: "",
     password: "",
@@ -19,11 +31,33 @@ const Login = () => {
 
   const handleSubmit = (values, { setSubmitting, resetForm }) => {
     console.log("Form Values:", values);
+    dispatch(reset());
+    dispatch(login(values));
     setSubmitting(false);
+    setIsSubmitting(true);
     resetForm();
   };
 
-  return (
+  useEffect(() => {
+    if (!isLoading) {
+      setAuthChecked(true);
+    }
+  }, [isLoading]);
+
+  if (!authChecked) {
+    return <Loader />;
+  }
+
+  if (isSuccess) {
+    return <Navigate to="/" />;
+  }
+
+  if (isError && isSubmitting) {
+    toast.error("Invalid Credentials");
+    setIsSubmitting(false);
+  }
+
+  return isError ? (
     <ShopLayout>
       <div className="flex justify-center items-center h-full">
         <div className="w-full max-w-md">
@@ -93,6 +127,8 @@ const Login = () => {
         </div>
       </div>
     </ShopLayout>
+  ) : (
+    <Loader />
   );
 };
 
