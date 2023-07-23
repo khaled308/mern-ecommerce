@@ -9,7 +9,7 @@ exports.getCategories = asyncErrorHandler(async (req, res, next) => {
 exports.createCategory = asyncErrorHandler(async (req, res, next) => {
   const category = await Category.create({
     ...req.body,
-    name: req.body.name.toLowerCase(),
+    name: req.body.name.toLowerCase().replace(/\s+/g, "-"),
   });
   res.status(201).json(category);
 });

@@ -6,6 +6,7 @@ const {
   deleteCategory,
   saveAttr,
 } = require("../controllers/category.controller");
+const { getProductsByCategory } = require("../controllers/product.controller");
 const { isAuth, isAdmin } = require("../middlewares/auth");
 const {
   categoryCreateValidator,
@@ -30,4 +31,5 @@ router
   .route("/:id/attrs")
   .put(isAuth, isAdmin, categorySaveAttrValidator, saveAttr);
 
+router.get("/:category/products", getProductsByCategory);
 module.exports = router;

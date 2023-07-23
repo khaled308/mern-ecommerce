@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect, useRef } from "react";
 
-const DropDown = ({ className, options }) => {
+const DropDown = ({ className, options, onChange }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(options?.[0] || "");
   const dropdownRef = useRef(null);
@@ -12,6 +12,7 @@ const DropDown = ({ className, options }) => {
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
+    onChange(option);
     setIsOpen(false);
   };
 

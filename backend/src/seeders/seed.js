@@ -1,6 +1,7 @@
 require("dotenv").config();
 const products = require("./products");
 const users = require("./users");
+const bcrypt = require("bcrypt");
 const categories = require("./categories");
 const reviews = require("./reviews");
 const Product = require("../models/Product");
@@ -14,7 +15,11 @@ const seed = async () => {
     await connectToDB();
 
     await User.deleteMany({});
-    const createdUsers = await User.insertMany(users);
+    const usersWithHashedPasswords = users.map((user) => ({
+      ...user,
+      password: bcrypt.hashSync(user.password, 10),
+    }));
+    const createdUsers = await User.insertMany(usersWithHashedPasswords);
     console.log("Users added successfully");
 
     await Category.deleteMany({});

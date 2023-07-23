@@ -1,3 +1,4 @@
+const Category = require("../models/Category");
 const Product = require("../models/Product");
 const { uploadFiles } = require("../services/fileUpload");
 const ApiFeatures = require("../utils/ApiFeatures");
@@ -8,8 +9,31 @@ exports.getProducts = async (req, res) => {
   const apiFeatures = new ApiFeatures(mongoQuery, req.query)
     .paginate(documentsCount)
     .sort()
-    .filter()
-    .filterByCategory();
+    .filter();
+  // .filterByCategory();
+
+  const products = await apiFeatures.mongooseQuery;
+  res.status(200).json({
+    products,
+    pagination: apiFeatures.pagination,
+  });
+};
+
+exports.getProductsByCategory = async (req, res) => {
+  const category = await Category.findOne({ name: req.params.category });
+  console.log(req.params.category);
+  if (!category) {
+    return res.status(404).json({ message: "Category does not exist" });
+  }
+
+  const documentsCount = await Product.countDocuments({
+    category: category._id,
+  });
+  let mongoQuery = Product.find({ category: category._id });
+  const apiFeatures = new ApiFeatures(mongoQuery, req.query)
+    .paginate(documentsCount)
+    .sort()
+    .filter();
 
   const products = await apiFeatures.mongooseQuery;
   res.status(200).json({
@@ -32,7 +56,10 @@ exports.createProduct = async (req, res) => {
   const { cover_image, images } = await uploadFiles(req.files);
   productData.cover_image = cover_image[0];
   productData.images = images;
-  const product = await Product.create(productData);
+  const product = await Product.create({
+    ...productData,
+    name: productData.name.toLowerCase().replace(/\s+/g, "-"),
+  });
 
   res.status(201).json(product);
 };

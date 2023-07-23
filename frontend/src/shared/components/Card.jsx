@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 const Card = ({ data, children }) => {
   return (
-    <div className="bg-white p-4 rounded-lg shadow mx-4 my-4 max-w-xs">
+    <div className="bg-white p-4 rounded-lg shadow mx-4 my-4 max-w-xs min-w-[300px]">
       <img
         src={data.image}
         alt={data.title}

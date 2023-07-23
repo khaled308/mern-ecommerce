@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
 import AdminLayout from "../layouts/AdminLayout";
-import { products } from "../../../dump-data";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Alert from "../../shared/components/Alert";
+import { getProducts } from "../../api/product";
+import Loader from "../../shared/components/Loader";
 
 const AdminProducts = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handleDelete = (productId) => {
     setShowAlert(true);
@@ -19,6 +22,16 @@ const AdminProducts = () => {
     setShowAlert(false);
   };
 
+  useEffect(() => {
+    async function fetchData() {
+      setLoading(true);
+      const data = await getProducts();
+      setLoading(false);
+      setProducts(data.products);
+      console.log(data);
+    }
+    fetchData();
+  }, []);
   return (
     <AdminLayout>
       {showAlert && (
@@ -29,76 +42,84 @@ const AdminProducts = () => {
           onConfirm={handleConfirmDelete}
         />
       )}
-      <div className="max-w-full overflow-x-auto">
-        <div className="flex items-center justify-between mb-5">
-          <h1 className="text-2xl font-bold mb-4">Products</h1>
-          <Link
-            to="/admin/products/create"
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition-colors duration-300"
-          >
-            Create Product
-          </Link>
-        </div>
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead>
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                ID
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Title
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Description
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Price
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Category
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Rating
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Actions
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {products.map((product) => (
-              <tr key={product.id}>
-                <td className="px-6 py-4 whitespace-nowrap">{product.id}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{product.title}</td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {product.description.substring(0, 50)}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">{product.price}</td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {product.category}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {product.rating}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <Link
-                    to={`/admin/products/edit/${product.id}`}
-                    className="text-blue-500 hover:underline mr-2"
-                  >
-                    Edit
-                  </Link>
-                  <button
-                    className="text-red-500 hover:underline"
-                    onClick={() => handleDelete(product.id)}
-                  >
-                    Delete
-                  </button>
-                </td>
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className="max-w-full overflow-x-auto">
+          <div className="flex items-center justify-between mb-5">
+            <h1 className="text-2xl font-bold mb-4">Products</h1>
+            <Link
+              to="/admin/products/create"
+              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition-colors duration-300"
+            >
+              Create Product
+            </Link>
+          </div>
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead>
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  ID
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Title
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Description
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Price
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Category
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Rating
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Actions
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {products.map((product, index) => (
+                <tr key={product._id}>
+                  <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {product.name}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {product.description.substring(0, 50)}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {product.price}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {product.category}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {product.rating}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <Link
+                      to={`/admin/products/edit/${product.id}`}
+                      className="text-blue-500 hover:underline mr-2"
+                    >
+                      Edit
+                    </Link>
+                    <button
+                      className="text-red-500 hover:underline"
+                      onClick={() => handleDelete(product.id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </AdminLayout>
   );
 };

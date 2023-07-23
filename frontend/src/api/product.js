@@ -8,3 +8,12 @@ export const getProducts = async () => {
     console.log(error);
   }
 };
+
+export const getProductsByCategory = async (category) => {
+  try {
+    const response = await axios.get(`/categories/${category}/products`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -1,16 +1,31 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { AiOutlineShoppingCart, AiOutlineSearch } from "react-icons/ai";
 import DropDown from "../../shared/components/DropDown";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getUser } from "../../features/auth/authSlice";
+import { getCategories } from "../../api/category";
 
 const Search = () => {
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const data = await getCategories();
+      setCategories(data.map((category) => category.name));
+    };
+
+    fetchCategories();
+  }, []);
+
+  const handelCategory = (category) => {
+    console.log(category);
+  };
   return (
     <div className="flex justify-center relative h-7">
       <DropDown
         className="absolute left-0 top-0 h-full"
-        options={["All", "test1", "test2"]}
+        options={categories}
+        onChange={handelCategory}
       />
 
       <input

@@ -21,7 +21,7 @@ const ProductFilterSidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`p-6 sm:p-3 fixed top-20 sm:top-0 left-0 bg-gray-900 sm:bg-white text-white sm:text-black h-full min-h-screen w-screen sm:w-1/4 sm:translate-x-0 ${
+        className={`p-6 sm:p-3 sm:pr-10 fixed top-20 sm:top-0 left-0 bg-gray-900 sm:bg-white text-white sm:text-black h-full min-h-screen w-screen sm:w-1/4 sm:translate-x-0 ${
           isOpen ? "translate-x-0" : "-translate-x-[103%]"
         } sm:${
           isOpen ? "-left-4" : "left-0"

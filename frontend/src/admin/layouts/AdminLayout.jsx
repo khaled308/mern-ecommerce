@@ -28,7 +28,7 @@ const AdminLayout = ({ children }) => {
   }
 
   return user && user.role === "admin" ? (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen w-screen overflow-hidden max-w-full">
       <Header />
       <div className="p-2 sm:p-4 py-4 flex-1 flex gap-2 flex-wrap w-screen">
         <Sidebar />
