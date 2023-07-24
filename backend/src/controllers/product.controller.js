@@ -47,6 +47,23 @@ exports.getProduct = async (req, res) => {
   res.status(200).json(product);
 };
 
+exports.getProductByName = async (req, res) => {
+  const product = await Product.findOne({ name: req.params.name })
+    .populate("category")
+    .populate({
+      path: "reviews",
+      populate: {
+        path: "user",
+        model: "User",
+      },
+    });
+  if (!product) {
+    return res.status(404).json({ message: "Product does not exist" });
+  }
+
+  res.status(200).json(product);
+};
+
 exports.createProduct = async (req, res) => {
   const selected = ["name", "price", "category", "description", "stock"];
   const productData = {};

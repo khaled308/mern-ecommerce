@@ -1,48 +1,36 @@
-import { useState } from "react";
 import ShopLayout from "../layouts/ShopLayout";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addToCart,
+  changeQuantity,
+  decreasingQuantity,
+  increaseQuantity,
+} from "../../features/cart/cartSlice";
 
 const Cart = () => {
-  const [cartItems, setCartItems] = useState([
-    { id: 1, name: "Product 1", price: 10, quantity: 2 },
-    { id: 2, name: "Product 2", price: 15, quantity: 1 },
-    { id: 3, name: "Product 3", price: 20, quantity: 3 },
-  ]);
+  const cartItems = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
-  const handleQuantityChange = (itemId, newQuantity) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === itemId ? { ...item, quantity: newQuantity } : item
-      )
-    );
+  const handleQuantityChange = (item, quantity) => {
+    dispatch(changeQuantity({ item, quantity }));
   };
 
-  const handleIncreaseQuantity = (itemId) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === itemId ? { ...item, quantity: item.quantity + 1 } : item
-      )
-    );
+  const handleIncreaseQuantity = (item) => {
+    dispatch(increaseQuantity(item));
   };
 
-  const handleDecreaseQuantity = (itemId) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === itemId && item.quantity > 1
-          ? { ...item, quantity: item.quantity - 1 }
-          : item
-      )
-    );
+  const handleDecreaseQuantity = (item) => {
+    dispatch(decreasingQuantity(item));
   };
 
-  const handleRemoveItem = (itemId) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
+  const handleRemoveItem = (item) => {
+    dispatch(addToCart(item));
   };
 
   const calculateTotal = () => {
-    return cartItems.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0
-    );
+    return cartItems.reduce((total, item) => {
+      return total + item.price * item.quantity;
+    }, 0);
   };
 
   return (
@@ -66,14 +54,14 @@ const Cart = () => {
                 </thead>
                 <tbody>
                   {cartItems.map((item) => (
-                    <tr key={item.id}>
+                    <tr key={item._id}>
                       <td className="py-2 px-4 border-b">{item.name}</td>
                       <td className="py-2 px-4 border-b">${item.price}</td>
                       <td className="py-2 px-4 border-b">
                         <div className="flex items-center">
                           <button
                             className="text-gray-500 px-2"
-                            onClick={() => handleDecreaseQuantity(item.id)}
+                            onClick={() => handleDecreaseQuantity(item)}
                           >
                             -
                           </button>
@@ -84,14 +72,14 @@ const Cart = () => {
                             value={item.quantity}
                             onChange={(e) =>
                               handleQuantityChange(
-                                item.id,
+                                item,
                                 parseInt(e.target.value)
                               )
                             }
                           />
                           <button
                             className="text-gray-500 px-2"
-                            onClick={() => handleIncreaseQuantity(item.id)}
+                            onClick={() => handleIncreaseQuantity(item)}
                           >
                             +
                           </button>
@@ -103,7 +91,7 @@ const Cart = () => {
                       <td className="py-2 px-4 border-b">
                         <button
                           className="text-red-500"
-                          onClick={() => handleRemoveItem(item.id)}
+                          onClick={() => handleRemoveItem(item)}
                         >
                           Remove
                         </button>

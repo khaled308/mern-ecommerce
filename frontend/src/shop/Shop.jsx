@@ -18,7 +18,7 @@ const Shop = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path=":category/products" element={<ProductsList />} />
-        <Route path="/products/:product" element={<ProductDetails />} />
+        <Route path="/products/:productName" element={<ProductDetails />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

@@ -17,3 +17,12 @@ export const getProductsByCategory = async (category) => {
     console.log(error);
   }
 };
+
+export const getProductByName = async (name) => {
+  try {
+    const response = await axios.get(`/products/product-name/${name}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

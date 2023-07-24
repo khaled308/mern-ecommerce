@@ -44,6 +44,7 @@ const Search = () => {
 const Links = () => {
   const location = useLocation();
   const { isError } = useSelector((state) => state.auth);
+  const cartItems = useSelector((state) => state.cart);
 
   return (
     <ul className="flex items-center justify-center gap-3 mt-4 sm:mt-0">
@@ -80,7 +81,7 @@ const Links = () => {
         >
           <AiOutlineShoppingCart className="mr-2" /> Cart
           <span className="bg-red-500 text-white rounded-full px-2 -ml-1 -mt-3">
-            5
+            {cartItems.length ? cartItems.length : ""}
           </span>
         </NavLink>
       </li>

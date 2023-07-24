@@ -1,6 +1,6 @@
 const products = [
   {
-    name: "Product 1",
+    name: "Product-1",
     description: "Description 1",
     price: 100,
     stock: 10,
@@ -15,7 +15,7 @@ const products = [
     ],
   },
   {
-    name: "Product 2",
+    name: "Product-2",
     description: "Description 2",
     price: 200,
     stock: 20,
@@ -30,7 +30,7 @@ const products = [
     ],
   },
   {
-    name: "Product 3",
+    name: "Product-3",
     description: "Description 3",
     price: 300,
     stock: 30,

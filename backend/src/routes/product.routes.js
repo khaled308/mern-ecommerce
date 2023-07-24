@@ -5,6 +5,7 @@ const {
   getProduct,
   updateProduct,
   deleteProduct,
+  getProductByName,
 } = require("../controllers/product.controller");
 const { upload } = require("../middlewares/multer");
 const {
@@ -34,6 +35,7 @@ router
   .put(isAuth, isAdmin, updateProduct)
   .delete(isAuth, isAdmin, deleteProduct);
 router.get("/best-selling", getBestSellingProducts);
+router.get("/product-name/:name", getProductByName);
 
 router.use("/:productId/reviews", reviewRoutes);
 
